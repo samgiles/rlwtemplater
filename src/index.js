@@ -41,6 +41,4 @@ function js(s) {
 		replace(/\n/gi, "") + "');";
 }
 
-module.exports = function(s) {
-	return new Function("data", "var b=[];" + js(s) + "return b.join('');");
-};
+module.exports = function(s) { return new Function("data", "var b=[];" + js(s) + "return b.join('');"); };

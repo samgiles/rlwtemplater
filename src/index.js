@@ -28,16 +28,19 @@
  * MIT Licenced - Samuel Giles http://samgil.es
  */
 
+// Create a JS string version of the template string.  It uses a 'builder'
+// array (b) to build the string, each component is pushed onto this which is
+// then joined before returning.
 function js(s) {
-	return "b.push('" + s.replace(/'/g, "\\'").
+	return "b.push('" + s.
+		replace(/'/g, "\\'").
 		replace(/<\+/g, "');b.push(").
 		replace(/\+>/g, ");b.push('").
 		replace(/<\|/g, "');").
 		replace(/\|>/g, "b.push('").
-		replace(/\\/g, "\\\\").
 		replace(/\n/gi, "") + "');";
 }
 
-module.exports.compile = function(s) {
+module.exports = function(s) {
 	return new Function("data", "var b=[];" + js(s) + "return b.join('');");
 };

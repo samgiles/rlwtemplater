@@ -4,10 +4,10 @@
   "description": "Really Lightweight Templater: A tiny templating library.",
   "main": "src/index.js",
   "directories": {
-    "test": "tests"
+    "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/mocha -C"
   },
   "keywords": [
     "template",

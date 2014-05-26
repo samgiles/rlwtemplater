@@ -1,16 +1,35 @@
 var assert = require("assert");
-var Template = require("../");
+var compile = require("../");
 
 describe('Template', function() {
 	describe('#compile()', function() {
 
 		it('should concatenate <+ +> statements', function() {
 			var template = 'Hello <+ data.person +>, today is <+ data.dayname +>.';
-			debugger;
-			var render = Template.compile(template);
+			var render = compile(template);
 			var rendered = render({ person: "Person", dayname: "Thursday"});
 			assert.equal("Hello Person, today is Thursday.", rendered);
 		});
 
+		it('should escape strings containing "\'" characters', function() {
+			var template = "It's cold outside today (<+ data.temp +> degrees).";
+			var render = compile(template);
+			var rendered = render({temp: -10});
+			assert.equal("It's cold outside today (-10 degrees).", rendered);
+		});
+
+		it('should remove new lines from rendered output', function() {
+			var template = "There\nare\nnewlines\nhere";
+			var render = compile(template);
+			var rendered = render({});
+			assert.equal("Therearenewlineshere", rendered);
+		});
+
+		it('should handle js control statements', function() {
+			var template = '<| for (var index = 0; index < data.people.length; index++) { |> Hello <+ data.people[index] +>! <| } |>';
+			var render = compile(template);
+			var rendered = render({ people: ["Jane", "John"]});
+			assert.equal(" Hello Jane!  Hello John! ", rendered);
+		});
 	});
 });

@@ -29,15 +29,15 @@
  */
 
 function js(s) {
-	return "p('" + s.replace(/'/g, "\\'").
-		replace(/<\+/g, "');p(").
-		replace(/\+>/g, ");p('").
+	return "b.push('" + s.replace(/'/g, "\\'").
+		replace(/<\+/g, "');b.push(").
+		replace(/\+>/g, ");b.push('").
 		replace(/<\|/g, "');").
-		replace(/\|>/g, "p('").
+		replace(/\|>/g, "b.push('").
 		replace(/\\/g, "\\\\").
 		replace(/\n/gi, "") + "');";
 }
 
 module.exports.compile = function(s) {
-	return new Function("data", "var b=[],p=b.push;" + js(s) + "return b.join('');");
+	return new Function("data", "var b=[];" + js(s) + "return b.join('');");
 };

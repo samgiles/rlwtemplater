@@ -32,13 +32,13 @@
 // array (b) to build the string, each component is pushed onto this which is
 // then joined before returning.
 function js(s) {
-	return "b.push('" + s.
+	return "var b='" + s.
 		replace(/'/g, "\\'").
-		replace(/<\+/g, "');b.push(").
-		replace(/\+>/g, ");b.push('").
-		replace(/<\|/g, "');").
-		replace(/\|>/g, "b.push('").
-		replace(/\n/gi, "") + "');";
+		replace(/<\+/g, "';b+=").
+		replace(/\+>/g, ";b+='").
+		replace(/<\|/g, "';").
+		replace(/\|>/g, "b+='").
+		replace(/\n/gi, "") + "';";
 }
 
-module.exports = function(s) { return new Function("data", "var b=[];" + js(s) + "return b.join('');"); };
+module.exports = function(s) { return new Function("data", js(s) + "return b;"); };

@@ -38,7 +38,7 @@ function js(s) {
 		replace(/\+>/g, ";b+='").
 		replace(/<\|/g, "';").
 		replace(/\|>/g, "b+='").
-		replace(/\n/g, "") + "';return b;";
+		replace(/\n/g, "\\n") + "';return b;";
 }
 
 module.exports = function(s) { return new Function("data", js(s)); };

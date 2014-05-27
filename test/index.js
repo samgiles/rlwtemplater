@@ -18,11 +18,11 @@ describe('Template', function() {
 			assert.equal("It's cold outside today (-10 degrees).", rendered);
 		});
 
-		it('should remove new lines from rendered output', function() {
+		it('should preserve new lines in rendered output', function() {
 			var template = "There\nare\nnewlines\nhere";
 			var render = compile(template);
 			var rendered = render({});
-			assert.equal("Therearenewlineshere", rendered);
+			assert.equal("There\nare\nnewlines\nhere", rendered);
 		});
 
 		it('should handle js control statements', function() {

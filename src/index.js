@@ -28,9 +28,6 @@
  * MIT Licenced - Samuel Giles http://samgil.es
  */
 
-// Create a JS string version of the template string.  It uses a 'builder'
-// array (b) to build the string, each component is pushed onto this which is
-// then joined before returning.
 function js(s) {
 	return "var b='" + s.
 		replace(/'/g, "\\'").

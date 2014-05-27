@@ -39,13 +39,18 @@ Control structures, looping etc.  Notice how javascript can be used by
 enclosing it within `<| |>` braces. Using `<+ +>` you can concatenate data
 inline with the rest of the string data.
 
+template:
+```
+Hello<| for (var i = 0; i < data.people.length - 1; i++) { |>
+ <+ data.people[i] +>,
+<| } |> 
+ and <+ data.people[data.people.length - 1] +>.
+```
+
 ```JS
 var compile = require("rlwtemplater");
 
-var render = compile(
-		"Hello<| for (var i = 0; i < data.people.length - 1; i++) { |>" +
-		" <+ data.people[i] +>," +
-		"<| } |> and <+ data.people[data.people.length - 1] +>.");
+var render = compile(template);
 
 log(render({people: ["A", "B", "C"]})); // Hello A, B, and C.
 ```

@@ -1,7 +1,7 @@
 # Really Lightweight Templating
 
 Yes, yet another small templating library for Javascript. The age old problem
-that has been solved coutless times. Why another?  So I could practice getting
+that has been solved countless times. Why another?  So I could practice getting
 used to node and javascript again, and additionally, try out mocha for the first
 time.
 
